@@ -93,7 +93,7 @@ exports.handleKeybinds = function(input) {
 		}
 
 		// Adjust scroll when active item is outside of the visible area
-		userlist.find(".user.active")[0].scrollIntoView(false);
+		utils.ensureScrolledInView(userlist.find(".user.active"), userlist);
 	});
 
 	// When pressing Enter, open the context menu (emit a click) on the active

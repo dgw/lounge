@@ -375,6 +375,7 @@ $(function() {
 				utils.toggleNotificationMarkers(false);
 			}
 
+			utils.ensureScrolledInView(self, sidebar);
 			slideoutMenu.toggle(false);
 		}
 

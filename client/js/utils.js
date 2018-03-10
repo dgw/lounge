@@ -14,6 +14,7 @@ module.exports = {
 	lastMessageId,
 	confirmExit,
 	forceFocus,
+	ensureScrolledInView,
 	hasRoleInChannel,
 	move,
 	resetHeight,
@@ -56,6 +57,21 @@ function hasRoleInChannel(channel, roles) {
 // This can only be called from another interactive event (e.g. button click)
 function forceFocus() {
 	input.trigger("click").trigger("focus");
+}
+
+// Generic scrollIntoView() re-implementation adapted from an old userlist handler
+// Because standards aren't necessarily usable even if CanIUse says you can
+function ensureScrolledInView(element, parent) {
+	const parentHeight = parent.height();
+	const parentScroll = parent.scrollTop();
+	const elementTop = element.position().top;
+	const elementHeight = element.height();
+
+	if (elementTop > parentHeight - elementHeight) {
+		parent.scrollTop(parentScroll + elementTop - parentHeight + elementHeight);
+	} else if (elementTop < 0) {
+		parent.scrollTop(parentScroll + elementTop - elementHeight);
+	}
 }
 
 function collapse() {
